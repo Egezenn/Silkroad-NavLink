@@ -1,11 +1,15 @@
 {
   "version": "0.1",
+  "date": "2026-04-23",
   "copyright": "Developed at Silkroad Developer Community",
   "license": "AGPLv3",
   "maintainer": "Egezenn",
   "contributors": "",
   "changelogs": {
-    "0.1": "A very early initial release where most of the world map is incorporated & navigable. Dungeons, special areas, Alexandria and Baghdad aren't supported yet."
+    "0.1": {
+      "description": "A very early initial release where most of the world map is incorporated & navigable. Dungeons, special areas, Alexandria and Baghdad aren't supported yet.",
+      "date": "2026-04-23"
+    }
   },
   "nodes": {
     "5027_1686_25761": {
