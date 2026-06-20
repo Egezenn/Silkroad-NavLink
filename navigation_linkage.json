@@ -1,6 +1,6 @@
 {
-  "version": "0.2",
-  "date": "2026-06-07",
+  "version": "0.2.1",
+  "date": "2026-06-20",
   "copyright": "Developed at Silkroad Developer Community",
   "license": "AGPLv3",
   "maintainer": "Egezenn",
@@ -13,6 +13,10 @@
     "0.2": {
       "description": "Added Dimensional Desert and Shambhala (Ice Temple).",
       "date": "2026-06-07"
+    },
+    "0.2.1": {
+      "description": "Gzipped releases",
+      "date": "2026-06-20"
     }
   },
   "nodes": {

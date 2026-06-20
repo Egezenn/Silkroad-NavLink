@@ -1,0 +1,44 @@
+name: Publish Release
+
+on:
+  push:
+    paths:
+      - 'navigation_linkage.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version and release notes
+        run: |
+          VERSION=$(jq -r '.version' navigation_linkage.json)
+          DESCRIPTION=$(jq -r --arg ver "$VERSION" '.changelogs[$ver].description' navigation_linkage.json)
+          DATE=$(jq -r --arg ver "$VERSION" '.changelogs[$ver].date' navigation_linkage.json)
+          
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          
+          echo "RELEASE_BODY<<EOF" >> $GITHUB_ENV
+          echo "$DESCRIPTION" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "Release Date: $DATE" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Gzip JSON file
+        run: |
+          gzip -c navigation_linkage.json > navigation_linkage.json.gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          body: ${{ env.RELEASE_BODY }}
+          files: |
+            navigation_linkage.json.gz
